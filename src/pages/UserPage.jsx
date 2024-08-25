@@ -3,7 +3,7 @@ import '../App.css'
 // import '../styles/style.css'
 import { useParams } from "react-router-dom";
 import UserPost from './../components/UserPost';
-
+import { v4 as uuidv4 } from 'uuid'
 
 function UserPage() {
 
@@ -12,7 +12,7 @@ function UserPage() {
     const [posts, setPosts] = useState([])
     const [myError, setError] = useState('');
 
-    const URL = `${apiUrl}/users/${userId}`;
+    const URL = `${apiUrl}/users/${userId}/posts`;
 
     async function loadPosts() {
         try {
@@ -32,13 +32,11 @@ function UserPage() {
 
     return (
         <div>
-            <header>User's page</header>
+            <header>User page</header>
             <article>
                 {posts.map((post) => 
-                    <UserPost
-                        title={post.title}
-                        timestamp={post.timestamp}
-                        message={post.message}
+                    <UserPost key={uuidv4()}
+                        post={post}
                     />
                 )}
             </article> 

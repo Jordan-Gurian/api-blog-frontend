@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '../App.css'
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -42,11 +42,10 @@ function CreateBlogPost() {
 
         try {
             const response = await fetch(URL, options);
-            const responseDetails = await response.json();
-            if (responseDetails) {
+            if (response.status === 201) {
                 navigate('/', { state: { successMessage: 'You have successfully logged in' } })    
             } else {
-                setError(responseDetails.message);
+                setError(response.status);
             }
             } catch (error) {
                 setError('Unknown error');

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import '../App.css'
 import { useParams } from "react-router-dom";
 import UserComment from './../components/UserComment';
-
+import { v4 as uuidv4 } from 'uuid';
 
 function UserCommentsPage() {
 
@@ -31,10 +31,10 @@ function UserCommentsPage() {
 
     return (
         <div>
-        <header>User's page</header>
+        <header>User page</header>
         <article>
             {comments.map((comment) => 
-                <UserComment
+                <UserComment key={uuidv4()}
                     timestamp={comment.timestamp}
                     message={comment.message}
                 />

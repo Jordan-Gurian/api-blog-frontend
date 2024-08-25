@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '../App.css'
 // import '../styles/style.css'
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
-
-
+ 
 function Login() {
     const navigate = useNavigate();
     const apiUrl = import.meta.env.VITE_API_URL

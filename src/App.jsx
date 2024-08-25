@@ -1,33 +1,33 @@
-import { Link } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode';
-
+import Navbar from './components/Navbar'
+import { Routes, Route } from "react-router-dom";
+// import ErrorPage from "./ErrorPage";
+import Login from "./pages/Login";
+import UserPage from "./pages/UserPage";
+import UserCommentsPage from "./pages/UserCommentsPage";
+import Register from "./pages/Register";
+import DeleteUser from "./pages/DeleteUser";
+import CreateBlogPost from "./pages/CreateBlogPost";
+import BlogpostPage from "./pages/BlogpostPage";
+import GetAllBlogPosts from './pages/GetAllBlogPosts';
 
 function App() {
 
-  if (localStorage.token) {
-    const token = localStorage.token;
-    const decoded = jwtDecode(token);
-    const userId = decoded.user._id;
-
-    return (
-      <div className="App">
-        <Link to={`users/${userId}/delete`}>You're logged in! But maybe you regret it? Delete your account</Link>
-        <Link to={'posts'}>Create a blog post!</Link>
-      </div>
-    )
-  } else {
-    return (
-      <div className="App">
-        <div>
-          <Link to="login">Login</Link>
-        </div>
-        <div>
-          <Link to="users/register">Register</Link>
-        </div>
-      </div>
-    )
-  }
-
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<GetAllBlogPosts/>}/>
+        <Route
+          path="/login" element={<Login/>}/>
+        <Route path="/users/:userId" element={<UserPage />}/>
+        <Route path="/users/:userId/comments" element={<UserCommentsPage />}/>
+        <Route path="/users/register" element={<Register />}/>
+        <Route path="/users/:userId/delete" element={<DeleteUser />}/>
+        <Route path="/posts" element={<CreateBlogPost />}/>
+        <Route path="/posts/:postId" element={<BlogpostPage />}/>
+      </Routes>
+    </>
+  )
 }
 
 export default App
